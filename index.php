@@ -20,61 +20,60 @@ include_once APP_ROOT . '/app/auth.php';
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="/static/js/moment.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		function getPosts( offset ) {
-			if(!offset) var offset = 0;
+  $(document).ready(function() {
+    function getPosts( offset ) {
+      if(!offset) var offset = 0;
 
-			$.getJSON('/app/msg.php',{"o": offset }, function(data) {
-				//console.log(data);
-				var items = [];
+      $.getJSON('/app/msg.php',{"o": offset }, function(data) {
+        //console.log(data);
+        var items = [];
 
-				$.each(data, function(key, post) {
+        $.each(data, function(key, post) {
 
-					var m = moment.unix(post.Posted);
+          var m = moment.unix(post.Posted);
 
-					items.push
-					(
-					 	'<tr>'
-					 +	'<td title="'+ m.format("MMMM Do YYYY, h:mm:ss a") +'" datetime="'+ post.Posted +'">'+ m.calendar() +'</td>'
-					 +	'<td>' + post.Body + '</td>'
-					 +	'<td>' + post.Phone + '</td>'
-					 +	'<td>' + post.FromCity + '</td>'
-					 +	'<td>' + post.FromZip + '</td>'
-					 +	'</tr>'
-					);
+          items.push
+          (
+          '<tr>'
+          +	'<td title="'+ m.format("MMMM Do YYYY, h:mm:ss a") +'" datetime="'+ post.Posted +'">'+ m.calendar() +'</td>'
+          +	'<td>' + post.Body + '</td>'
+          +	'<td>' + post.Phone + '</td>'
+          +	'<td>' + post.FromCity + '</td>'
+          +	'<td>' + post.FromZip + '</td>'
+          +	'</tr>'
+          );
+        });
 
-				});
-
-				var html = items.join('');
+        var html = items.join('');
 
         if (offset == 0) {
           $('#responses').append( html );
         }
 
         $('.badge').text( items.length );
-			});
+    });
 
-			return false;
-		}
+    return false;
+  }
 
-		//get first batch
-		getPosts();
+  //get first batch
+  getPosts();
 
-		//e-z infinite scroll
-		var offset = 12;
-		$(window).scroll(function() {
-			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-				getPosts(offset);
-				offset = offset + 12;
-			}
-		});
-
-    //lastload timer
-    var loaded = new Date();
-    setInterval(function(){
-      $('#lastload').text( moment(loaded).fromNow() );
+  //e-z infinite scroll
+  var offset = 12;
+  $(window).scroll(function() {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      getPosts(offset);
+      offset = offset + 12;
     }
-    ,21*1000);
+  });
+
+  //lastload timer
+  var loaded = new Date();
+  setInterval(function(){
+    $('#lastload').text( moment(loaded).fromNow() );
+  }
+  ,21*1000);
 
   });
 	</script>
