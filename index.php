@@ -35,12 +35,12 @@ include_once APP_ROOT . '/app/auth.php';
           items.push
           (
           '<tr>'
-          +	'<td title="'+ m.format("MMMM Do YYYY, h:mm:ss a") +'" datetime="'+ post.Posted +'">'+ m.calendar() +'</td>'
-          +	'<td>' + post.Body + '</td>'
-          +	'<td>' + post.Phone + '</td>'
-          +	'<td>' + post.FromCity + '</td>'
-          +	'<td>' + post.FromZip + '</td>'
-          +	'</tr>'
+          + '<td title="'+ m.format("MMMM Do YYYY, h:mm:ss a") +'" datetime="'+ post.Posted +'">'+ m.calendar() +'</td>'
+          + '<td>' + post.Body + '</td>'
+          + '<td>' + post.Phone + '</td>'
+          + '<td>' + post.FromCity + '</td>'
+          + '<td>' + post.FromZip + '</td>'
+          + '</tr>'
           );
         });
 
@@ -76,8 +76,8 @@ include_once APP_ROOT . '/app/auth.php';
   ,21*1000);
 
   });
-	</script>
-	<style>
+  </script>
+  <style>
   .bs-docs-nav{
     text-shadow: 0 -1px 0 rgba(0,0,0,.15);
     background-color: #563d7c;
@@ -97,7 +97,7 @@ include_once APP_ROOT . '/app/auth.php';
   </style>
   </head>
   <body>
-	
+  
   <header class="navbar bs-docs-nav" role="banner">
     <div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Recent Responses</div>
     <small class="navbar-text pull-right" id="lastload"></small>
