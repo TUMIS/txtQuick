@@ -1,4 +1,4 @@
-<?
+<?php
 include_once 'app/lib.php';
 include_once APP_ROOT . '/app/auth.php';
 
@@ -47,9 +47,9 @@ include_once APP_ROOT . '/app/auth.php';
 
 				var html = items.join('');
 
-				if (offset == 0) {
-					$('#responses').append( html );
-				}
+        if (offset == 0) {
+          $('#responses').append( html );
+        }
 
         $('.badge').text( items.length );
 			});
@@ -76,47 +76,48 @@ include_once APP_ROOT . '/app/auth.php';
     }
     ,21*1000);
 
-	});
+  });
 	</script>
 	<style>
-		.bs-docs-nav{
-      text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-      background-color: #563d7c;
-      border-color: #463265;
-      box-shadow: 0 1px 0 rgba(255,255,255,.1);
-		}
-		.bs-docs-nav .navbar-brand,
-    .navbar-text {
-      color: #fff;
-		}
-		.navbar{
-			border-radius: 0;
-		}
-    #lastload{
-      opacity: .667;
-    }
+  .bs-docs-nav{
+    text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+    background-color: #563d7c;
+    border-color: #463265;
+    box-shadow: 0 1px 0 rgba(255,255,255,.1);
+  }
+  .bs-docs-nav .navbar-brand,
+  .navbar-text {
+    color: #fff;
+  }
+  .navbar{
+    border-radius: 0;
+  }
+  #lastload{
+    opacity: .667;
+  }
 	</style>
 	</head>
 	<body>
-	<header class="navbar bs-docs-nav" role="banner">
-		<div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Recent Responses</div>
+	
+  <header class="navbar bs-docs-nav" role="banner">
+    <div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Recent Responses</div>
     <small class="navbar-text pull-right" id="lastload"></small>
 	</header>
 
-	<div class="container container-fluid">
-		<div class="table-responsive">
-			<table class="table table-hover table-condensed table-striped">
-				<thead>
-					<th title="Posted"><span class="glyphicon glyphicon-calendar"></span></th>
-					<th title="Body"><span class="glyphicon glyphicon-envelope"></span> <span class="badge"></span></th>
-					<th title="Phone"><span class="glyphicon glyphicon-phone-alt"></span></th>
-					<th title="City"><span class="glyphicon glyphicon-home"></span></th>
-					<th title="Zip Code"><span class="glyphicon glyphicon-barcode"></span></th>
-				</thead>
-				<tbody id="responses"></tbody>
-			</table>
-		</div>
-	</div>
+  <div class="container container-fluid">
+    <div class="table-responsive">
+      <table class="table table-hover table-condensed table-striped">
+        <thead>
+        <th title="Posted"><span class="glyphicon glyphicon-calendar"></span></th>
+        <th title="Body"><span class="glyphicon glyphicon-envelope"></span> <span class="badge"></span></th>
+        <th title="Phone"><span class="glyphicon glyphicon-phone-alt"></span></th>
+        <th title="City"><span class="glyphicon glyphicon-home"></span></th>
+        <th title="Zip Code"><span class="glyphicon glyphicon-barcode"></span></th>
+        </thead>
+        <tbody id="responses"></tbody>
+      </table>
+    </div>
+  </div>
 
 	</body>
 </html>

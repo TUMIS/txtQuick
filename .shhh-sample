@@ -3,8 +3,8 @@
 /**
 * Set app wide configurations here
 */
-define('CFG_EMAILS',	'sample@sample.com' );
-define('CFG_TIMEZONE',	'America/Los_Angeles' );
-define('CFG_USER',		'user' );
-define('CFG_PASS',		'password' );
-define('CFG_SALT',		'wsBsrAbat6rrD65l' );
+define('CFG_EMAILS',  'sample@sample.com' );
+define('CFG_TIMEZONE','America/Los_Angeles' );
+define('CFG_USER',    'user' );
+define('CFG_PASS',    'password' );
+define('CFG_SALT',    'wsBsrAbat6rrD65l' );

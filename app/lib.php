@@ -20,14 +20,14 @@ class TxtQuick {
 	 * @static
 	 * @param int $json (default: 0)
 	 * @param int $offset (default: 0)
-	 * @param int $num (default: 12)
+	 * @param int $num (default: 1000)
 	 * @return void
 	 */
 
 	static public function get($json = 0, $offset = 0, $num = 1000)
 	{
 
-		$sql = sprintf("SELECT * FROM r ORDER BY Posted DESC LIMIT %d, %d", $offset, $num) ;
+		$sql = sprintf("SELECT SmsSid,FromCountry,FromCity,Phone,FromZip,Body,Posted FROM r ORDER BY Posted DESC LIMIT %d, %d", $offset, $num) ;
 
 		$posts = TxtQuick_Utils::get_all( $sql );
 
@@ -138,7 +138,7 @@ class TxtQuick_SMS {
 	 */
 	public function email()
 	{
-		$to      = CFG_EMAILS;
+    $to      = CFG_EMAILS;
 		$subject = 'txtQuick Response';
 		$message = $this->sms['Body'];
 		$headers = 'From: web@txtback.com' . "\r\n";
@@ -153,11 +153,11 @@ class TxtQuick_SMS {
 	 */
 	private function tap_phone($p)
 	{
-		return substr($p, 2, 6);
+    return substr($p, 2, 6);
 	}
 
 	/**
-	 * hash phone
+	 * hash phone for multiple input tracking
 	 *
 	 * @access public
 	 * @return void
@@ -167,31 +167,31 @@ class TxtQuick_SMS {
 		return crypt($p, CFG_SALT ); 
 	}
 
-	/**
-	 * save_item function.
-	 *
-	 * @access private
-	 * @param mixed $i
-	 * @return void
-	 */
-	private function save($i)
-	{
-		$sql = array(
-			'q' => "INSERT INTO r (SmsSid,FromCountry,FromCity,Phone,PhoneHash,FromZip,Body,Posted) VALUES (?,?,?,?,?,?,?,?)",
-			'p' => array(
-				$i['SmsSid'],
-				$i['FromCountry'],
-				$i['FromCity'],
-				$i['From'],
-				$i['PhoneHash'],
-				$i['FromZip'],
-				$i['Body'],
-				time()
-			)
-		);
+  /**
+  * save the text 
+  *
+  * @access private
+  * @param mixed $i
+  * @return void
+  */
+  private function save($i)
+  {
+    $sql = array(
+      'q' => "INSERT INTO r (SmsSid,FromCountry,FromCity,Phone,PhoneHash,FromZip,Body,Posted) VALUES (?,?,?,?,?,?,?,?)",
+      'p' => array(
+        $i['SmsSid'],
+        $i['FromCountry'],
+        $i['FromCity'],
+        $i['From'],
+        $i['PhoneHash'],
+        $i['FromZip'],
+        $i['Body'],
+        time()
+      )
+    );
 
-		TxtQuick_Utils::prepped($sql);
-	}
+    TxtQuick_Utils::prepped($sql);
+  }
 
 }
 
@@ -210,7 +210,7 @@ class TxtQuick_Utils {
 	 */
 	static function log(array $var)
 	{
-		$msg = date(DATE_RFC822) .' '. var_export($var, true) ."\n";
+    $msg = date(DATE_RFC822) .' '. var_export($var, true) ."\n";
 		file_put_contents( APP_ROOT . '/storage/txt.log', $msg, FILE_APPEND);
 	}
 
