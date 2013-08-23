@@ -13,16 +13,16 @@ date_default_timezone_set( CFG_TIMEZONE );
  */
 class TxtQuick {
 
-	/**
-	 * get function.
-	 *
-	 * @access public
-	 * @static
-	 * @param int $json (default: 0)
-	 * @param int $offset (default: 0)
-	 * @param int $num (default: 1000)
-	 * @return void
-	 */
+  /**
+   * get function.
+   *
+   * @access public
+   * @static
+   * @param int $json (default: 0)
+   * @param int $offset (default: 0)
+   * @param int $num (default: 1000)
+   * @return void
+   */
 
   static public function get($json = 0, $offset = 0, $num = 1000)
   {
@@ -48,25 +48,25 @@ class TxtQuick {
 /**
  * TxtQuick_SMS class.
  *
-	 <code>
-	 $t = new TxtQuick_SMS( $sms );
-	 $t->process();
-	 </code>
+   <code>
+   $t = new TxtQuick_SMS( $sms );
+   $t->process();
+   </code>
  *
  */
 class TxtQuick_SMS {
-	var $sms;
-	var $response = '';
+  var $sms;
+  var $response = '';
 
-	/**
-	 * __construct function.
-	 *
-	 * @access public
-	 * @param mixed $sms
-	 * @return void
-	 */
-	public function __construct($sms)
-	{
+  /**
+   * __construct function.
+   *
+   * @access public
+   * @param mixed $sms
+   * @return void
+   */
+  public function __construct($sms)
+  {
     $sms['Body'] = TxtQuick_Utils::cleaner($sms['Body']);
 
     $sms['PhoneHash'] = $this->hash_phone($sms['From']);
@@ -74,16 +74,16 @@ class TxtQuick_SMS {
     $sms['From'] = $this->tap_phone($sms['From']);
 
     $this->sms = $sms;
-	}
+  }
 
-	/**
-	 * process function. only check for Empties
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function process()
-	{
+  /**
+   * process function. only check for Empties
+   *
+   * @access public
+   * @return void
+   */
+  public function process()
+  {
     //log for debug
     TxtQuick_Utils::log($this->sms);
 
@@ -95,16 +95,16 @@ class TxtQuick_SMS {
 
     //respond to user
     $this->respond();
-	}
+  }
 
-	/**
-	 * respond with thanks or query
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function respond()
-	{
+  /**
+   * respond with thanks or query
+   *
+   * @access public
+   * @return void
+   */
+  public function respond()
+  {
     $body = trim($this->sms['Body']);
 
     if ( empty( $body ) ):
@@ -114,58 +114,58 @@ class TxtQuick_SMS {
     endif;
 
     $this->twilio();
-	}
+  }
 
-	/**
-	 * wrap for twilio (abstract for other SMS providors)
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function twilio()
-	{
+  /**
+   * wrap for twilio (abstract for other SMS providors)
+   *
+   * @access public
+   * @return void
+   */
+  public function twilio()
+  {
     header("content-type: text/xml");
     $template  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     $template .= sprintf("<Response><Sms>%s</Sms></Response>", $this->response);
     print $template;
-	}
+  }
 
-	/**
-	 * send email
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function email()
-	{
+  /**
+   * send email
+   *
+   * @access public
+   * @return void
+   */
+  public function email()
+  {
     $to      = CFG_EMAILS;
     $subject = 'txtQuick Response';
     $message = $this->sms['Body'];
     $headers = 'From: web@txtback.com' . "\r\n";
     mail($to, $subject, $message, $headers);
-	}
+  }
 
-	/**
-	 * truncate phone
-	 *
-	 * @access public
-	 * @return void
-	 */
-	private function tap_phone($p)
-	{
+  /**
+   * truncate phone
+   *
+   * @access public
+   * @return void
+   */
+  private function tap_phone($p)
+  {
     return substr($p, 2, 6);
-	}
+  }
 
-	/**
-	 * hash phone for multiple input tracking
-	 *
-	 * @access public
-	 * @return void
-	 */
-	private function hash_phone($p)
-	{
-		return crypt($p, CFG_SALT ); 
-	}
+  /**
+   * hash phone for multiple input tracking
+   *
+   * @access public
+   * @return void
+   */
+  private function hash_phone($p)
+  {
+    return crypt($p, CFG_SALT ); 
+  }
 
   /**
   * save the text 
@@ -314,8 +314,8 @@ class TxtQuick_Utils {
  * Database Singleton
  */
 class TxtQuick_Database {
-	private static $instance=NULL;
-	private $dbh;
+  private static $instance=NULL;
+  private $dbh;
 
   /**
   * __construct function.
@@ -353,15 +353,15 @@ class TxtQuick_Database {
     return self::$instance;
   }
 
-	/**
-	 * prepare function.
-	 *
-	 * @access public
-	 * @param mixed $sql
-	 * @return void
-	 */
-	public function prepare($sql)
-	{
+  /**
+   * prepare function.
+   *
+   * @access public
+   * @param mixed $sql
+   * @return void
+   */
+  public function prepare($sql)
+  {
     try
     {
       return $this->dbh->prepare($sql);
@@ -370,7 +370,7 @@ class TxtQuick_Database {
     {
       echo $e->getMessage();
     }
-	}
+  }
 
   /**
   * query function.
