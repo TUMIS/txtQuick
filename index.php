@@ -5,21 +5,21 @@ include_once APP_ROOT . '/app/auth.php';
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta charset="utf-8">
-	<title>txtQuick</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<link rel="shortcut icon" href="/static/img/favicon.ico">
-	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/apple-touch-icon.png">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="/static/js/moment.min.js"></script>
-	<script type="text/javascript">
+  <meta charset="utf-8">
+  <title>txtQuick</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" href="/static/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/img/apple-touch-icon.png">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="/static/js/moment.min.js"></script>
+  <script type="text/javascript">
   $(document).ready(function() {
     function getPosts( offset ) {
       if(!offset) var offset = 0;
@@ -94,14 +94,14 @@ include_once APP_ROOT . '/app/auth.php';
   #lastload{
     opacity: .667;
   }
-	</style>
-	</head>
-	<body>
+  </style>
+  </head>
+  <body>
 	
   <header class="navbar bs-docs-nav" role="banner">
     <div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Recent Responses</div>
     <small class="navbar-text pull-right" id="lastload"></small>
-	</header>
+  </header>
 
   <div class="container container-fluid">
     <div class="table-responsive">
@@ -118,5 +118,5 @@ include_once APP_ROOT . '/app/auth.php';
     </div>
   </div>
 
-	</body>
+  </body>
 </html>
