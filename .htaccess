@@ -1,0 +1,6 @@
+#hide non-publics: db,log,lib
+<FilesMatch "\.(htaccess|shhh|db|log|shhh-sample)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+

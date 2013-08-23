@@ -80,14 +80,14 @@ include_once APP_ROOT . '/app/auth.php';
 	</script>
 	<style>
 		.bs-docs-nav{
-		  	text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  			background-color: #563d7c;
-  			border-color: #463265;
-  			box-shadow: 0 1px 0 rgba(255,255,255,.1);
+      text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+      background-color: #563d7c;
+      border-color: #463265;
+      box-shadow: 0 1px 0 rgba(255,255,255,.1);
 		}
 		.bs-docs-nav .navbar-brand,
     .navbar-text {
-  			color: #fff;
+      color: #fff;
 		}
 		.navbar{
 			border-radius: 0;

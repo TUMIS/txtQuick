@@ -12,4 +12,3 @@ if(($_SERVER['PHP_AUTH_USER'] !== CFG_USER) && ($_SERVER['PHP_AUTH_PW'] !== CFG_
 
   die();
 }
-
