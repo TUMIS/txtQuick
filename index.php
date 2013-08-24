@@ -75,6 +75,36 @@ include_once APP_ROOT . '/app/auth.php';
   }
   ,21*1000);
 
+  //edit reply
+  $('#systemmsg').hide();
+  $("#saveReply").bind("click mousedown touchdown", function(e) {
+
+    e.preventDefault();
+    var data = {};
+    data.replytext = $('#replytext').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/app/editor.php',
+      data: data,
+      dataType: 'text',
+      cache: false,
+      beforeSend: function() {
+        $(this).attr("disable"); //disable double submit
+      },
+      success: function(response) {
+        if ( response == 'ok' ) {
+          $('#systemmsg').text('New reply saved').show().fadeOut(5000);
+          $('#myModal').modal('hide');
+        }
+      },
+      error: function(xhr,text,error) {
+        $(this).attr("enable"); //enable resubmit
+        alert("There was an error saving, please try again.");
+      }
+    }); 
+  });
+
   });
   </script>
   <style>
@@ -99,9 +129,14 @@ include_once APP_ROOT . '/app/auth.php';
   <body>
   
   <header class="navbar bs-docs-nav" role="banner">
-    <div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Recent Responses</div>
+    <div class="navbar-brand"><span class="glyphicon glyphicon-inbox"></span> Responses</div>
     <small class="navbar-text pull-right" id="lastload"></small>
   </header>
+
+  <div class="container container-fluid">
+    <div class="pull-right"><a data-toggle="modal" href="#myModal" class="btn btn-info btn-xs">Edit Reply</a></div>
+    <div class="alert alert-info" id="systemmsg">stuff</div>
+  </div>
 
   <div class="container container-fluid">
     <div class="table-responsive">
@@ -115,6 +150,25 @@ include_once APP_ROOT . '/app/auth.php';
         </thead>
         <tbody id="responses"></tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Edit the Txt Reply</h4>
+        </div>
+        <div class="modal-body">
+          <small class="pull-right text-muted">( max: 160 characters )</small>
+          <textarea name="replytext" class="form-control" rows="3" id="replytext"><?= TxtQuick_SMS::get_reply() ?></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveReply">Save Changes</button>
+        </div>
+      </div>
     </div>
   </div>
 

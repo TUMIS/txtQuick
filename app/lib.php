@@ -107,11 +107,14 @@ class TxtQuick_SMS {
   {
     $body = trim($this->sms['Body']);
 
+    /* hide for now
     if ( empty( $body ) ):
       $this->response = 'What do you feel? Que sientes?';
     else:
       $this->response = 'Gracias. Thanks. Merci !';
     endif;
+    */
+    $this->response = self::get_reply();
 
     $this->twilio();
   }
@@ -143,6 +146,41 @@ class TxtQuick_SMS {
     $message = $this->sms['Body'];
     $headers = 'From: web@txtback.com' . "\r\n";
     mail($to, $subject, $message, $headers);
+  }
+
+  /**
+   * get reply
+   *
+   * @access public
+   * @return void
+   */
+  public function get_reply()
+  {
+    $sql = sprintf("SELECT reply FROM cms WHERE id=%d ", 1) ;
+
+    $text = TxtQuick_Utils::get_all( $sql );
+
+    return $text[0]['reply'];
+  }
+
+  /**
+   * save updated reply
+   *
+   * @access public
+   * @return void
+   */
+  public function update_reply($i)
+  {
+    $sql = array(
+      'q' => "UPDATE cms SET reply=?, updated_at=? WHERE id = ?",
+      'p' => array(
+        $i,
+        time(),
+        1
+      )
+    );
+
+    return TxtQuick_Utils::prepped($sql);
   }
 
   /**
